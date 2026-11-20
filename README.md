@@ -1,52 +1,52 @@
-# Mushroom Wizard (Грибной волшебник) — local prototype
+# Mushroom Wizard (Грибной волшебник)
 
-**Play in the browser: https://iansilent.github.io/mushroom-wizard/**
+A 2D platformer prototype about a wizard on mushrooms. Every jump makes him drunker; a short window of Clarity gives back control and one spell.
 
-A 2D platformer prototype for validating one design idea: a wizard on mushrooms balances between a
-**drunk** state (high, growing, weird jumps) and short **Clarity** windows (precise jumps + one spell).
+[![Mushroom Wizard: stage D3, the world turns neon](docs/screenshot.jpg)](https://iansilent.github.io/mushroom-wizard/)
 
-## Share / copy to another computer
+**[▶ Play in the browser](https://iansilent.github.io/mushroom-wizard/)** · keyboard and mouse · UI in Russian
 
-```bash
-node tools/build.js
-```
+## The idea being tested
 
-This writes `dist/mushroom-wizard.html`: one self-contained file with all scripts and styles inlined.
-Copy just that file and open it with a double-click. `index.html` alone does NOT work, because it loads `src/` and `style.css`.
-Re-run the build after every change.
+Can one character be fun to control in two opposite states, and is switching between them an interesting decision?
 
-## Run
+- **Drunk** is the default. There are four stages, D1 to D4. Every jump raises the stage by one. Jumps get higher and floatier, the ground gets slippery, and the wizard starts to sway and hiccup. Only jumps raise the stage; time never does.
+- **Clarity** lasts a few seconds. Jumps are low and precise, and you may cast one spell: Blink, Levitate or Feather fall. Casting ends Clarity at once.
 
-Double-click `index.html` (no build step, no internet needed).
-If your browser blocks local files, serve the folder locally instead:
-
-```bash
-python3 -m http.server 8765 --bind 127.0.0.1
-```
-
-and open http://127.0.0.1:8765.
+Each stage repaints the whole world, so you always see how far gone you are.
 
 ## Controls
 
-| Action | Keys |
+| Action | Input |
 |---|---|
-| Move / aim spell | ← → ↑ ↓ or WASD |
-| Jump | Z / Space / J |
-| Focus (Clarity) | X / Shift / K |
-| Cast (one per Clarity) | C / L — C = Blink, C+↑ = Levitate, C+↓ = Feather fall |
+| Move, aim a spell | Arrows or WASD |
+| Jump | Space / Z / J |
+| Clarity | Left mouse button, or X / K |
+| Spells (one per Clarity) | 1 Blink, 2 Levitate, 3 Feather fall |
 | Back to checkpoint | R |
-| Pause / settings (volume) | Esc |
-| Mute | M |
-| Debug panel (live tuning) | ` (backquote) |
-| Debug overlay (arcs, hitboxes) | G |
-| Debug: set stage / next / prev checkpoint / god / infinite clarity | 1–4 / N / B / I / O (after opening the debug panel once) |
+| Pause and settings | Esc |
+| Debug panel with live tuning | ` |
 
-## Tools (Node)
+## What is inside
+
+- Eight short rooms that teach the stages and the spells one by one, plus a sandbox.
+- A debug panel where every movement number is a slider.
+- [DESIGN.md](DESIGN.md): the mechanics, the level design rules and the art direction.
+
+## Run locally
+
+Plain HTML, CSS and JavaScript on a canvas. No build step and no dependencies.
 
 ```bash
-node tools/metrics.js          # measured movement envelopes per state
-node tools/check.js            # replay every room's solution scripts + robustness under timing noise
-node tools/check.js s4_blink --trace main
+python3 -m http.server 8765
 ```
 
-See `DESIGN.md` for mechanics, level-design rules and code contracts.
+Then open http://localhost:8765. Double-clicking `index.html` also works in most browsers.
+
+## Checks
+
+Every room has a scripted solution that is replayed headlessly, also under timing noise:
+
+```bash
+node tools/check.js
+```

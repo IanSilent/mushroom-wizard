@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Грибной волшебник — прототип</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+  <canvas id="bg" width="960" height="540"></canvas>
+  <canvas id="game" width="960" height="540"></canvas>
+  <div id="ui"></div>
+</div>
+<!-- Pure simulation (also loaded by the Node tools) -->
+<script src="src/config.js"></script>
+<script src="src/level.js"></script>
+<script src="src/player.js"></script>
+<script src="src/world.js"></script>
+<!-- Level data: room files first, order.js last -->
+<script src="src/levels/rooms_intro.js"></script>
+<script src="src/levels/rooms_spells.js"></script>
+<script src="src/levels/rooms_mix.js"></script>
+<script src="src/levels/sandbox.js"></script>
+<script src="src/levels/order.js"></script>
+<!-- Browser-only -->
+<script src="src/palette.js"></script>
+<script src="src/settings.js"></script>
+<script src="src/input.js"></script>
+<script src="src/audio.js"></script>
+<script src="src/fx_bg.js"></script>
+<script src="src/render.js"></script>
+<script src="src/ui.js"></script>
+<script src="src/main.js"></script>
+</body>
+</html>
